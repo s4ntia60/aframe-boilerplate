@@ -1,18 +1,52 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html>
-  <head>
-    <meta charset="utf-8">
-    <title>Hello, World! • A-Frame</title>
-    <meta name="description" content="Hello, World! • A-Frame">
-    <script src="https://aframe.io/releases/0.2.0/aframe.min.js"></script>
-  </head>
-  <body>
-    <a-scene>
-      <a-sphere position="0 1.25 -1" radius="1.25" color="#EF2D5E"></a-sphere>
-      <a-cube position="-1 0.5 1" rotation="0 45 0" width="1" height="1" depth="1" color="#4CC3D9"></a-cube>
-      <a-cylinder position="1 0.75 1" radius="0.5" height="1.5" color="#FFC65D"></a-cylinder>
-      <a-plane rotation="-90 0 0" width="4" height="4" color="#7BC8A4"></a-plane>
-      <a-sky color="#ECECEC"></a-sky>
-    </a-scene>
-  </body>
+	<head>
+		<meta charset="utf-8">
+		<title>A-Frame Test</title>
+		<meta name="description" content="Hello, World! • A-Frame">
+		<script src="https://aframe.io/releases/0.2.0/aframe.min.js"></script>
+	</head>
+	<body >     
+		<div id="options"  style="width: 200px; height:150px; position: fixed; top:200px; left: 20px; color:gray" >
+			<h1> Loading...</h1>
+			<h2> Tested on Firefox</h2>
+		</div>
+
+		<a-scene stats>         
+			<a-assets timeout="10000">
+
+				<a-asset-item id="grenadedae" src="assets/grenade.dae">
+				<!--<a-asset-item id="grenadeobj" src="assets/grenade.obj">-->
+				<video id="illuminati" autoplay loop="true" src="assets/illuminati.mp4">
+				<img id="ui1img" src="assets/ui1.png">
+				<img id="ui2img" src="assets/ui2.png">    
+				<img id="texture" src="assets/maps/Standardmaterial_Base_Color.png">  			   
+			</a-assets>
+
+			
+			<a-curvedimage  id="ui1" src="#ui2img" radius="5.7" theta-length="17" height="1" rotation="0 2 0" position="0 3 0"></a-curvedimage>
+			<a-curvedimage id="ui2" src="#ui1img" radius="5.7" theta-length="17" height="1" opacity="1" rotation="0 -2 0" position="0 1.7 0"></a-curvedimage>
+			
+			
+			<a-collada-model src="#grenadedae" material="src: #texture; color: #00FF00; roughness: 1; metalness: 1" position="-2.2 1 3" scale="10 10 10">
+				    <a-animation attribute="rotation" dur="5000" easing="linear" repeat="indefinite"  to="0 360 0"></a-animation>
+			</a-collada-model>
+			<!--<a-obj-model src="#grenadeobj"   material="side: double;" position="-0.0 2 2" scale="1 1 1"></a-obj-model>-->
+
+			<!-- New lights. -->
+			<a-light type="spot" color="#333" position="-12 0 0" look-at="0 0 0"></a-light>
+			<a-light type="point" color="#AAA" position="0 5 0"></a-light> 
+			<a-sky src="assets/env.jpg" rotation="0 -130 0"></a-sky>
+			<a-video src="#illuminati"width="16" height="9" position="0 0 -20"></a-video>
+
+
+			<a-entity position="-0 1.8 1.5" rotation="-0 190 0" look-at="#ui1img">
+			<a-camera wasd-controls-enabled="false">
+			<a-cursor color="#2E3A87">
+			</a-camera>
+			</a-entity>
+		</a-scene>
+
+	</body>
+	
 </html>
